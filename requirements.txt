@@ -1,0 +1,2 @@
+psycopg2==2.8.6
+discord-webhook==0.13.0
