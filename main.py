@@ -21,6 +21,10 @@ def main():
         for task in tasks:
             if __is_time_to_run(task['schedule']):
                 message = TaskFactory().execute(task['kind'], task['configuration'])
+
+                if not message:
+                    continue
+
                 for notification in task['notifications']:
                     NotificationFactory().execute(notification['kind'], notification['data'], message)
             timer.sleep(5 * 60)    
