@@ -1,22 +1,22 @@
 import psycopg2
-
 class Postgresql:
-    def getExecuteQuery(self, host, database, user, password, command, timeout=120):
+    def __init__(self, host, database, user, password, timeout=120):
+        self.__connection = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            connect_timeout=timeout,
+        )
+
+    def __del__(self):
+        self.__connection.close()
+
+    def get_query(self, command):
         try:
-            connection = psycopg2.connect(
-                host=host,
-                database=database,
-                user=user,
-                password=password,
-                connect_timeout=timeout,
-            )
-            query = connection.cursor()
+            query = self.__connection.cursor()
             query.execute(command)
-            result = query.fetchall()
-            query.close()
-            connection.close()
 
-            return result
-
+            return query
         except Exception as error:
             return f"Erro: {error}"
