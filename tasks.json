@@ -15,21 +15,18 @@
                 "host": "192.168.3.1",
                 "database": "redmine"
             },
-            "command-sql": "select upper(pri.name), tsk.subject, tsk.id from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
-            "message-format": {
-                "header": "Estado da lista de tarefas N3",
-                "each-record-body": ":point_right: **[{0}]** - {1} \\nhttp://www.redmine.test.com/issues/{2}",
-                "footer": ""
-            }
+            "sql-command": "select upper(pri.name), tsk.subject, tsk.id from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
+            "message-format": ":point_right: **[{0}]** - {1} \\nhttp://www.redmine.test.com/issues/{2}"
         },
         "notification": [
             {
                 "kind": "discord", 
                 "data": {
                     "webhook": "...",
-                    "username": "Chuck Norris",
+                    "user-name": "Chuck Norris",
                     "avatar-url": "https://assets.webiconspng.com/uploads/2017/09/Chuck-Norris-PNG-Image-34465.png",
-                    "color": "FF0000"
+                    "color": "FF0000",
+                    "title": "Estado da lista de tarefas N3"
                 }
             },
             {
