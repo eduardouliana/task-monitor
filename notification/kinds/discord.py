@@ -1,6 +1,6 @@
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
-class Discord():
+class Notification():
     def __init__(self, data):
         self.__title = data['title']
         self.__webhook = DiscordWebhook(url=data['url'], username=data['user-name'], avatar_url=data['avatar-url'])
