@@ -1,6 +1,14 @@
-from jobs.redmine import Redmine
+#from jobs.redmine import Redmine
+
 from datetime import datetime, time
 import time as timer
+import json
+
+def __loadTasksConfig():
+    with open('tasks.json') as json_file:
+        data = json.load(json_file)
+
+    return data        
 
 def _itsTimeToWork():
     startTime = time(8,0)
@@ -14,9 +22,14 @@ def _itsTimeToWork():
     return True
 
 def main():
-    __30Minutes = 60 * 30    
+    tasksConfig = __loadTasksConfig()
+
+    for config in tasksConfig:
+        task = 
 
     while True:
+        for task in tasks:
+            
         if _itsTimeToWork():
             Redmine().sendN3TasksNotification()
         timer.sleep(__30Minutes)
