@@ -1,7 +1,7 @@
 [
     {
         "name": "Redmine - N3",
-        "kind": "sql-report",
+        "kind": "sql_report",
         "schedule": {
             "kind": "interval",
             "time": 30,
@@ -10,32 +10,25 @@
         },
         "configuration": {
             "database": {
-                "username": "sysdba",
-                "password": "abc123",
-                "host": "192.168.3.1",
-                "database": "redmine"
+                "username": "user",
+                "password": "pass",
+                "host": "192.168...",
+                "database": "database"
             },
             "sql-command": "select upper(pri.name), tsk.subject, tsk.id from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
-            "message-format": ":point_right: **[{0}]** - {1} \\nhttp://www.redmine.test.com/issues/{2}"
+            "message-format": ":point_right: **[{0}]** - {1} \nhttp://www.redmine.test.com/issues/{2}"
         },
-        "notification": [
+        "notifications": [
             {
                 "kind": "discord", 
                 "data": {
-                    "webhook": "...",
+                    "url": "webhook url",
                     "user-name": "Chuck Norris",
                     "avatar-url": "https://assets.webiconspng.com/uploads/2017/09/Chuck-Norris-PNG-Image-34465.png",
                     "color": "FF0000",
                     "title": "Estado da lista de tarefas N3"
                 }
-            },
-            {
-                "kind": "skype",
-                "data": {
-                    "url": "...",
-                    "channel-name": "notificacao"
-                }
-            }
+            }            
         ]
     }
 ]
