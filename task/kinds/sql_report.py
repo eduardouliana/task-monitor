@@ -1,5 +1,5 @@
-from utils.postgresql import Postgresql
-from utils.postgresql import Postgresql
+from core.postgresql import Postgresql
+from core.postgresql import Postgresql
 
 class Task():
     def __init__(self, configuration):
@@ -12,7 +12,7 @@ class Task():
             __database['username'],
             __database['password'],
         )
-        
+
     def __del__(self):
         del self.__postgresql
 
