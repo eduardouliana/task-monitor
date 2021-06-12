@@ -1,9 +1,8 @@
-import importlib.util
+from core.factory import BaseFactory
 
-class NotificationFactory():
+class NotificationFactory(BaseFactory):
+    __MODULE_NAME_FORMAT = "notification.kinds.{}"
+    __FILE_PATH_FORMAT = "notification/kinds/{}.py"
 
-    def execute(self, kind, data, message):
-        spec = importlib.util.spec_from_file_location(f"notification.kinds.{kind}", f"notification/kinds/{kind}.py")
-        spec_module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(spec_module)
-        spec_module.Notification(data).execute(message)        
+    def get_instance(self, data):
+        return self.__spec_module.Notification(data)
