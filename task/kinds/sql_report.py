@@ -12,6 +12,9 @@ class Task():
             __database['username'],
             __database['password'],
         )
+        
+    def __del__(self):
+        del self.__postgresql
 
     def execute(self):
         query = self.__postgresql.get_query(self.__sql_command)
@@ -23,6 +26,5 @@ class Task():
             messages.append(message)
 
         query.close()
-        del self.__postgresql
 
         return '\n\n'.join(messages)
