@@ -5,8 +5,10 @@
         "schedule": {
             "kind": "interval",
             "time": 30,
-            "start": "08:00",
-            "end": "19:00"
+            "period": {
+                "start": "08:00",
+                "end": "19:00"
+            }
         },
         "configuration": {
             "database": {
@@ -20,7 +22,7 @@
         },
         "notifications": [
             {
-                "kind": "discord", 
+                "kind": "discord",
                 "data": {
                     "url": "webhook url",
                     "user-name": "Chuck Norris",
@@ -28,7 +30,7 @@
                     "color": "FF0000",
                     "title": "Estado da lista de tarefas N3"
                 }
-            }            
+            }
         ]
     }
 ]
