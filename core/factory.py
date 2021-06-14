@@ -1,6 +1,7 @@
 import importlib.util
 
 class BaseFactory():
+
     __MODULE_NAME_FORMAT = "base.{}"
     __FILE_PATH_FORMAT = "base/{}.py"
 
