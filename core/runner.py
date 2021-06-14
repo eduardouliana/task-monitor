@@ -1,3 +1,4 @@
+from core.schedule import Schedule
 from task.factory import TaskFactory
 from notification.factory import NotificationFactory
 
@@ -6,8 +7,9 @@ class Runner():
     def __init__(self, tasks):
         self.__tasks = tasks
 
-    def __is_time_to_run(self, schedule):
-        return True
+    def __is_time_to_run(self, data):
+        schedule = Schedule(data)
+        return schedule.is_in_period()
 
     def __get_task_message(self, kind, configuration):
         task = TaskFactory(kind).get_instance(configuration)
