@@ -1,20 +1,36 @@
-import json
 import time
+import click
 from core.runner import Runner
+from core.tasks import Tasks
 
-def __load_tasks():
-    with open('tasks.json') as json_file:
-        data = json.load(json_file)
-
-    return data
-
-def main():
-    tasks = __load_tasks()
+def __execute(tasks, interval):
     runner = Runner(tasks)
 
     while True:
         runner.perform()
-        time.sleep(5 * 60)
+        time.sleep(interval * 60)
+
+@click.group()
+@click.version_option("1.0")
+def cli():
+    """
+    TaskMonitor
+    """
+
+@cli.command("json-file")
+@click.option("--interval", default=30, help="Intervalo entra as execuções")
+@click.option("--file-path", default="tasks.json", help="Arquivo contendo as tasks")
+def json_file(interval, file_path):
+    tasks = Tasks.get_from_json_file(file_path)
+    __execute(tasks, interval)
+
+@cli.command()
+@click.option("--interval", default=30, help="Intervalo entra as execuções")
+@click.option("--db-name", default="task-monitor-d4715-default-rtdb", help="Nome do RealtimeDB")
+@click.option("--file-path", default="/tasks", help="Caminho até as tasks no RealtimeDB")
+def firebase(interval, db_name, data_path):
+    tasks = Tasks.get_from_firebase(db_name, data_path)
+    __execute(tasks, interval)
 
 if __name__ == '__main__':
-    main()
+    cli()
