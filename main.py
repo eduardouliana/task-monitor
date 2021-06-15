@@ -27,7 +27,7 @@ def json_file(interval, file_path):
 @cli.command()
 @click.option("--interval", default=30, help="Intervalo entra as execuções")
 @click.option("--db-name", default="task-monitor-d4715-default-rtdb", help="Nome do RealtimeDB")
-@click.option("--file-path", default="/tasks", help="Caminho até as tasks no RealtimeDB")
+@click.option("--data-path", default="/tasks", help="Caminho até as tasks no RealtimeDB")
 def firebase(interval, db_name, data_path):
     tasks = Tasks.get_from_firebase(db_name, data_path)
     __execute(tasks, interval)
