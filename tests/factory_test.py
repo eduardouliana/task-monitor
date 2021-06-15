@@ -2,6 +2,7 @@ import unittest
 from core.factory import BaseFactory
 
 class MyFactory(BaseFactory):
+
     __MODULE_NAME_FORMAT = "tests.resources.factory_test.{}"
     __FILE_PATH_FORMAT = "tests/resources/factory_test/{}.py"
 
