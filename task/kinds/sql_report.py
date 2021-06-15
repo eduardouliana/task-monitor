@@ -1,17 +1,16 @@
-from core.postgresql import Postgresql
-from core.postgresql import Postgresql
+from database.postgresql import Postgresql
 
 class Task():
 
     def __init__(self, configuration):
         self.__sql_command = configuration['sql-command']
         self.__message_format = configuration['message-format']
-        __database = configuration['database']
+        database = configuration['database']
         self.__postgresql = Postgresql(
-            __database['host'],
-            __database['database'],
-            __database['username'],
-            __database['password'],
+            database['host'],
+            database['database'],
+            database['username'],
+            database['password'],
         )
 
     def __del__(self):
