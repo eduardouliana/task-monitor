@@ -1,8 +1,12 @@
-import time
+from datetime import datetime, time
 
 class Schedule():
 
-    def is_in_period(self, start, end):
-        now = time.strftime("%H:%M", time.localtime())
+    def __init__(self, start, end, ):
+        self.__start = time.fromisoformat(start)
+        self.__end = time.fromisoformat(end)
 
-        return True
+    def is_in_period(self, start, end):
+        now = datetime.now().time()
+
+        return (now > start_time) and (now < end_time)
