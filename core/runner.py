@@ -9,7 +9,11 @@ class Runner():
 
     def __is_time_to_run(self, data):
         schedule = Schedule(data)
-        return schedule.is_in_period()
+
+        if not schedule.is_in_period():
+            return False
+
+        return schedule.is_time_to_run()
 
     def __get_task_message(self, kind, configuration):
         task = TaskFactory(kind).get_instance(configuration)
