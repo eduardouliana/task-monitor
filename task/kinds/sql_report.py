@@ -1,5 +1,4 @@
 from utils.postgresql import Postgresql
-from utils.postgresql import Postgresql
 
 class Task():
     def __init__(self, configuration):
