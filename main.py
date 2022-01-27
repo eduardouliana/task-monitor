@@ -27,7 +27,7 @@ def main():
 
                 for notification in task['notifications']:
                     NotificationFactory().execute(notification['kind'], notification['data'], message)
-            timer.sleep(5 * 60)    
+            timer.sleep(30 * 60)    
 
 if __name__ == '__main__':
     main()
