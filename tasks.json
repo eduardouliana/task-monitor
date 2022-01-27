@@ -15,8 +15,8 @@
                 "host": "192.168...",
                 "database": "database"
             },
-            "sql-command": "select upper(pri.name), tsk.subject, tsk.id from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
-            "message-format": ":point_right: **[{0}]** - {1} \nhttp://www.redmine.test.com/issues/{2}"
+            "sql-command": "select upper(pri.name), tsk.subject, tsk.id, (select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 15 and cf.customized_id = tsk.id)),(select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 18 and cf.customized_id = tsk.id)), case when pri.name = 'Baixa' then 'white_circle' when pri.name like '%dia' then 'green_circle' when pri.name = 'Alta' then 'orange_circle' when pri.name like '%tica' then 'red_circle' else 'point_right' end from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
+            "message-format": ":{5}: **[{0}]** - {1} \n**Cliente:** {3} \n**Caminho:** {4} \nhttps://redmine.sysmo.com.br:1000/issues/{2}"
         },
         "notifications": [
             {
