@@ -1,14 +1,32 @@
+import textwrap
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
-class Notification():
-    def __init__(self, data):
-        self.__title = data['title']
-        self.__webhook = DiscordWebhook(url=data['url'], username=data['user-name'], avatar_url=data['avatar-url'])
+from models.notification_data import NotificationData
+
+
+class Notification:
+    def __init__(self, data: NotificationData):
+        self.__title = data.title
+        self.__webhook = DiscordWebhook(
+            url=data.url, username=data.user_name, avatar_url=data.avatar_url
+        )
 
     def send(self, embed):
         self.__webhook.add_embed(embed)
-        self.__webhook.execute()
+        self.__webhook.execute(remove_embeds=True)
 
     def execute(self, message):
-        embed = DiscordEmbed(title=self.__title, description=message, color='FF0000')
-        self.send(embed)
+        message_list = textwrap.wrap(message, 4000, replace_whitespace=False)
+
+        for index, msg in enumerate(message_list):
+            embed = DiscordEmbed(
+                title=self.__title,
+                description=msg,
+                color="FF0000",
+            )
+
+            embed.set_footer(
+                text=f"{index+1}/{len(message_list)}",
+            )
+
+            self.send(embed)
