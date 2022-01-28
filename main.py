@@ -33,7 +33,8 @@ def main():
                     NotificationFactory().execute(
                         notification.kind, notification.data, message
                     )
-            timer.sleep(30 * 60)
+                    
+        timer.sleep(30 * 60)
 
 
 if __name__ == "__main__":
