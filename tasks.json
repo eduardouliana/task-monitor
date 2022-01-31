@@ -10,10 +10,10 @@
         },
         "configuration": {
             "database": {
-                "username": "user",
-                "password": "pass",
-                "host": "192.168...",
-                "database": "database"
+                "username": "REDMINE_DATABASE_USERNAME",
+                "password": "REDMINE_DATABASE_PASSWORD",
+                "host": "REDMINE_DATABASE_HOST",
+                "database": "REDMINE_DATABASE_NAME"
             },
             "sql-command": "select upper(pri.name), tsk.subject, tsk.id, (select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 15 and cf.customized_id = tsk.id)),(select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 18 and cf.customized_id = tsk.id)), case when pri.name = 'Baixa' then 'white_circle' when pri.name like '%dia' then 'green_circle' when pri.name = 'Alta' then 'orange_circle' when pri.name like '%tica' then 'red_circle' else 'point_right' end from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
             "message-format": ":{5}: **[{0}]** - {1} \n**Cliente:** {3} \n**Caminho:** {4} \nhttps://redmine.sysmo.com.br:1000/issues/{2}"
@@ -22,11 +22,43 @@
             {
                 "kind": "discord", 
                 "data": {
-                    "url": "webhook url",
+                    "url": "REDMINE_WEBHOOK_URL",
+                    "user-name": "Redmine",
+                    "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+                    "color": "FF0000",
+                    "title": "Estado da lista de tarefas N3"
+                }
+            }            
+        ]
+    },
+    {
+        "name": "Top-10 Stacktrace",
+        "kind": "sql_report",
+        "schedule": {
+            "kind": "interval",
+            "time": 60,
+            "start": "08:00",
+            "end": "08:55"
+        },
+        "configuration": {
+            "database": {
+                "username": "STACKTRACE_DATABASE_USERNAME",
+                "password": "STACKTRACE_DATABASE_PASSWORD",
+                "host": "STACKTRACE_DATABASE_HOST",
+                "database": "STACKTRACE_DATABASE_NAME"
+            },
+            "sql-command": "select tx_mensagemerro, count(1) as total_errors, string_agg(distinct nullif(tx_programa, ''), ', ') as programs, to_char(dt_cadastro::date, 'DD-MM-YYYY'),\n case row_number() over(order by count(1) desc)\n when 1 then 'one'\n when 2 then 'two'\n when 3 then 'three'\n when 4 then 'four'\n when 5 then 'five'\n when 6 then 'six'\n when 7 then 'seven'\n when 8 then 'eight'\n when 9 then 'nine'\n when 10 then 'keycap_ten'\n end\n from tb_ocorrenciaerro\n where dt_cadastro::date = 'yesterday'\n group by tx_mensagemerro, dt_cadastro::date\n order by total_errors desc\n limit 10",
+            "message-format": ":{4}: **{0}**\n**Total**: {1}\n**Programas:** {2}\n--url(https://stacktrace.sysmo.com.br:8078/stacktrace/error_occurrences?ocorrencia[dt_fim]={3}&ocorrencia[dt_inicio]={3}&ocorrencia[mensagem]={0})"
+        },
+        "notifications": [
+            {
+                "kind": "discord", 
+                "data": {
+                    "url": "STACKTRACE_WEBHOOK_URL",
                     "user-name": "Chuck Norris",
                     "avatar-url": "https://assets.webiconspng.com/uploads/2017/09/Chuck-Norris-PNG-Image-34465.png",
                     "color": "FF0000",
-                    "title": "Estado da lista de tarefas N3"
+                    "title": "Top-10 Stacktrace"
                 }
             }            
         ]

@@ -1,4 +1,6 @@
 import psycopg2
+
+
 class Postgresql:
     def __init__(self, host, database, user, password, timeout=120):
         self.__connection = psycopg2.connect(
