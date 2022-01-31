@@ -18,7 +18,9 @@ def __load_tasks():
 def __is_time_to_run(schedule: Schedule):
     current_date_time = datetime.now()
 
-    if schedule.next_execution <= current_date_time:
+    if (schedule.next_execution <= current_date_time) and (
+        schedule.start <= current_date_time.time() <= schedule.end
+    ):
         schedule.next_execution = current_date_time + schedule.time
         return True
 

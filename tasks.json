@@ -36,9 +36,9 @@
         "kind": "sql_report",
         "schedule": {
             "kind": "interval",
-            "time": 30,
+            "time": 60,
             "start": "08:00",
-            "end": "19:00"
+            "end": "08:55"
         },
         "configuration": {
             "database": {
