@@ -32,7 +32,7 @@
         ]
     },
     {
-        "name": "Top-10 Stacktrace",
+        "name": "Top-10 Stacktrace do dia de ontem",
         "kind": "sql_report",
         "schedule": {
             "kind": "interval",
