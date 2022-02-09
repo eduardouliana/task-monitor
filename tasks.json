@@ -6,7 +6,7 @@
             "kind": "interval",
             "time": 30,
             "start": "08:00",
-            "end": "19:00"
+            "end": "18:00"
         },
         "configuration": {
             "database": {
@@ -37,8 +37,8 @@
         "schedule": {
             "kind": "interval",
             "time": 60,
-            "start": "08:00",
-            "end": "08:55"
+            "start": "09:00",
+            "end": "09:55"
         },
         "configuration": {
             "database": {
@@ -55,8 +55,8 @@
                 "kind": "discord", 
                 "data": {
                     "url": "STACKTRACE_WEBHOOK_URL",
-                    "user-name": "Chuck Norris",
-                    "avatar-url": "https://assets.webiconspng.com/uploads/2017/09/Chuck-Norris-PNG-Image-34465.png",
+                    "user-name": "Stacktrace",
+                    "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
                     "color": "FF0000",
                     "title": "Top-10 Stacktrace"
                 }
