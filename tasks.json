@@ -1,12 +1,40 @@
 [
     {
-        "name": "Redmine - N3",
+        "name": "Redmine - N3 - Semanal",
         "kind": "sql_report",
         "schedule": {
-            "kind": "interval",
-            "time": 30,
-            "start": "08:00",
-            "end": "19:00"
+            "kind": "cron",
+            "cron": "*/30 8-18 * * 1-5"
+        },
+        "configuration": {
+            "database": {
+                "username": "REDMINE_DATABASE_USERNAME",
+                "password": "REDMINE_DATABASE_PASSWORD",
+                "host": "REDMINE_DATABASE_HOST",
+                "database": "REDMINE_DATABASE_NAME"
+            },
+            "sql-command": "select upper(pri.name), tsk.subject, tsk.id, (select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 15 and cf.customized_id = tsk.id)),(select name from custom_field_enumerations cf where cf.id = (select cast(value as Integer) from custom_values cf where cf.custom_field_id = 18 and cf.customized_id = tsk.id)), case when pri.name = 'Baixa' then 'white_circle' when pri.name like '%dia' then 'green_circle' when pri.name = 'Alta' then 'orange_circle' when pri.name like '%tica' then 'red_circle' else 'point_right' end from issues tsk inner join enumerations pri on pri.id = tsk.priority_id and pri.\"type\" = 'IssuePriority' where tsk.assigned_to_id = 193 and tsk.closed_on is null order by tsk.priority_id desc",
+            "message-format": ":{5}: **[{0}]** - {1} \n**Cliente:** {3} \n**Caminho:** {4} \nhttps://redmine.sysmo.com.br:1000/issues/{2}"
+        },
+        "notifications": [
+            {
+                "kind": "discord", 
+                "data": {
+                    "url": "REDMINE_WEBHOOK_URL",
+                    "user-name": "Redmine",
+                    "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+                    "color": "FF0000",
+                    "title": "Estado da lista de tarefas N3"
+                }
+            }            
+        ]
+    },
+    {
+        "name": "Redmine - N3 - Final de semana",
+        "kind": "sql_report",
+        "schedule": {
+            "kind": "cron",
+            "cron": "*/15 7-12 * * 6"
         },
         "configuration": {
             "database": {
