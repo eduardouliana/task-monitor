@@ -60,7 +60,7 @@
         ]
     },
     {
-        "name": "Top-10 Stacktrace",
+        "name": "Top-10 Stacktrace do dia de ontem",
         "kind": "sql_report",
         "schedule": {
             "kind": "interval",
@@ -83,42 +83,10 @@
                 "kind": "discord", 
                 "data": {
                     "url": "STACKTRACE_WEBHOOK_URL",
-                    "user-name": "Chuck Norris",
-                    "avatar-url": "https://assets.webiconspng.com/uploads/2017/09/Chuck-Norris-PNG-Image-34465.png",
-                    "color": "FF0000",
-                    "title": "Top-10 Stacktrace"
-                }
-            }            
-        ]
-    },
-    {
-        "name": "Top-10 Stacktrace do dia de ontem",
-        "kind": "sql_report",
-        "schedule": {
-            "kind": "interval",
-            "time": 60,
-            "start": "09:00",
-            "end": "09:55"
-        },
-        "configuration": {
-            "database": {
-                "username": "STACKTRACE_DATABASE_USERNAME",
-                "password": "STACKTRACE_DATABASE_PASSWORD",
-                "host": "STACKTRACE_DATABASE_HOST",
-                "database": "STACKTRACE_DATABASE_NAME"
-            },
-            "sql-command": "select tx_mensagemerro, count(1) as total_errors, string_agg(distinct nullif(tx_programa, ''), ', ') as programs, to_char(dt_cadastro::date, 'DD-MM-YYYY'),\n case row_number() over(order by count(1) desc)\n when 1 then 'one'\n when 2 then 'two'\n when 3 then 'three'\n when 4 then 'four'\n when 5 then 'five'\n when 6 then 'six'\n when 7 then 'seven'\n when 8 then 'eight'\n when 9 then 'nine'\n when 10 then 'keycap_ten'\n end\n from tb_ocorrenciaerro\n where dt_cadastro::date = 'yesterday'\n group by tx_mensagemerro, dt_cadastro::date\n order by total_errors desc\n limit 10",
-            "message-format": ":{4}: **{0}**\n**Total**: {1}\n**Programas:** {2}\n--url(https://stacktrace.sysmo.com.br:8078/stacktrace/error_occurrences?ocorrencia[dt_fim]={3}&ocorrencia[dt_inicio]={3}&ocorrencia[mensagem]={0})"
-        },
-        "notifications": [
-            {
-                "kind": "discord", 
-                "data": {
-                    "url": "STACKTRACE_WEBHOOK_URL",
                     "user-name": "Stacktrace",
                     "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
                     "color": "FF0000",
-                    "title": "Top-10 Stacktrace"
+                    "title": "Top-10 Stacktrace do dia de ontem"
                 }
             }            
         ]
