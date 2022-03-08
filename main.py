@@ -16,7 +16,6 @@ def __load_tasks():
     return data
 
 
-
 def main():
     tasks = __load_tasks()
 
