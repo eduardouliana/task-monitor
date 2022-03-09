@@ -1,7 +1,3 @@
-# from jobs.redmine import Redmine
-from datetime import datetime
-from croniter import croniter
-from models.schedule.factory import Factory
 from models.task import Task
 from task.factory import TaskFactory
 from notification.factory import NotificationFactory
