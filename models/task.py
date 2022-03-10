@@ -1,13 +1,13 @@
 from models.configuration import Configuration
 from models.notification import Notification
-from models.schedule.factory import Factory
+from schedule.factory import KindFactory
 
 
 class Task:
     def __init__(self, json_task):
         self.name = json_task["name"]
         self.kind = json_task["kind"]
-        self.schedule = Factory(json_task["schedule"])
+        self.schedule = KindFactory(json_task["schedule"]).new()
         self.configuration = Configuration(json_task["configuration"])
         self.notifications = [
             Notification(element) for element in json_task["notifications"]
