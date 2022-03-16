@@ -2,15 +2,17 @@ from schedule.kinds.cron import Cron
 from schedule.kinds.interval import Interval
 
 
-class KindFactory:
+class ScheduleFactory:
+    __KINDS = {"interval": Interval, "cron": Cron}
+    
     def __init__(self, json_schedule):
-        self._kind_list = {"interval": Interval, "cron": Cron}
-        self._kind = json_schedule["kind"]
+        schedule_kind = json_schedule["kind"]
 
-        if not self._kind in self._kind_list:
+        if not schedule_kind in self.__KINDS:
             raise Exception("Invalid schedule kind")
 
+        self._kind = self.__KINDS[schedule_kind]
         self._json_schedule = json_schedule
 
     def new(self):
-        return self._kind_list[self._kind](self._json_schedule)
+        return self._kind(self._json_schedule)
