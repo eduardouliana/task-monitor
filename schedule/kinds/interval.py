@@ -12,12 +12,14 @@ class Interval:
         return datetime.strptime(time, "%H:%M").time()
 
     def is_time_to_run(self):
-        _current_date_time = datetime.now()
-        _is_time = (self._next_execution <= _current_date_time) and (
-            self._start <= _current_date_time.time() <= self._end
-        )
+        current_date_time = datetime.now()
 
-        if _is_time:
-            self._next_execution = _current_date_time + self._time
+        if (current_date_time <= self._next_execution):
+            return False
 
-        return _is_time
+        is_time = self._start <= current_date_time.time() <= self._end
+    
+        if is_time:
+            self._next_execution = current_date_time + self._time
+
+        return is_time
