@@ -17,7 +17,7 @@ def main():
 
     while True:
         for task in tasks:
-            if task.schedule.is_time_to_run():
+            if task.can_run():
                 message = TaskFactory().execute(task.kind, task.configuration)
 
                 if not message:
