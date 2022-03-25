@@ -1,6 +1,3 @@
-# from jobs.redmine import Redmine
-from datetime import datetime
-from models.schedule import Schedule
 from models.task import Task
 from task.factory import TaskFactory
 from notification.factory import NotificationFactory
@@ -15,24 +12,12 @@ def __load_tasks():
     return data
 
 
-def __is_time_to_run(schedule: Schedule):
-    current_date_time = datetime.now()
-
-    if (schedule.next_execution <= current_date_time) and (
-        schedule.start <= current_date_time.time() <= schedule.end
-    ):
-        schedule.next_execution = current_date_time + schedule.time
-        return True
-
-    return False
-
-
 def main():
     tasks = __load_tasks()
 
     while True:
         for task in tasks:
-            if __is_time_to_run(task.schedule):
+            if task.can_run():
                 message = TaskFactory().execute(task.kind, task.configuration)
 
                 if not message:
