@@ -21,20 +21,30 @@ class Task:
         records = query.fetchall()
 
         messages = []
+        translate_map = str.maketrans("\n\t\r", "   ")
         for record in records:
-            message = self.__message_format.format(*record)
+            new_record = list(record)
+            for i, r in enumerate(new_record):
+                if isinstance(r, str):
+                    new_record[i] = re.sub(r' +', ' ', r.translate(translate_map).strip())
+
+            message = self.__message_format.format(*new_record)
 
             if message.find("--url") >= 0:
                 original_match = re.search(
-                    r"--url\(((http://|https://).*)\)", message
+                    r"--url\(((http:\/\/|https:\/\/).*)\)", 
+                    repr(message),
+                    flags=re.MULTILINE
                 ).group()
                 original_url, _ = re.search(
-                    r"--url\(((http://|https://).*)\)", message
+                    r"--url\(((http:\/\/|https:\/\/).*)\)", 
+                    repr(message),
+                    flags=re.MULTILINE
                 ).groups()
 
-                parsed_url = original_url.replace(" ", "+")
+                parsed_url = bytes(original_url, encoding= 'windows-1252').decode('unicode_escape').replace(" ", "+")
 
-                message = message.replace(original_match, parsed_url)
+                message = message.replace(bytes(original_match, encoding= 'windows-1252').decode('unicode_escape'), parsed_url)
 
             messages.append(message)
 
