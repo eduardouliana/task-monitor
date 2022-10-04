@@ -6,7 +6,7 @@ import json
 
 
 def __load_tasks():
-    with open("tasks.json") as json_file:
+    with open("tasks.json", encoding="utf-8") as json_file:
         data = [Task(element) for element in json.load(json_file)]
 
     return data
