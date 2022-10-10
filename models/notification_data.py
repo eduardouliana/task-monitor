@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 
+from models.date_configuration import DateConfiguration
+
 
 class NotificationData:
     def __init__(self, json_notification_data):
@@ -11,4 +13,4 @@ class NotificationData:
         self.avatar_url = json_notification_data["avatar-url"]
         self.color = json_notification_data["color"]
         self.title = json_notification_data["title"]
-        self.current_date_on_title = json_notification_data["current_date_on_title"]
+        self.date_configuration = DateConfiguration(json_notification_data.get("date-configuration", dict()))

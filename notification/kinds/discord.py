@@ -3,11 +3,12 @@ import textwrap
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 from models.notification_data import NotificationData
+from utils.date_helper import DateHelper
 
 
 class Notification:
     def __init__(self, data: NotificationData):
-        self.__title = f"{data.title} {date.today().strftime('%d-%m-%Y') if data.current_date_on_title else ''}"
+        self.__title = f"{data.title}{DateHelper.get_date(data.date_configuration)}"
         self.__webhook = DiscordWebhook(
             url=data.url, username=data.user_name, avatar_url=data.avatar_url
         )
