@@ -30,7 +30,8 @@
           "user-name": "Redmine",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FF0000",
-          "title": "Estado da lista de tarefas N3"
+          "title": "Estado da lista de tarefas N3",
+          "current_date_on_title": false
         }
       }
     ]
@@ -64,7 +65,8 @@
           "user-name": "Stacktrace",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FF0000",
-          "title": "Top-10 Stacktrace do dia de ontem"
+          "title": "Top-10 Stacktrace do dia",
+          "current_date_on_title": true
         }
       }
     ]
@@ -98,7 +100,8 @@
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
-          "title": "Clientes atualizados no dia de ontem"
+          "title": "Clientes atualizados no dia",
+          "current_date_on_title": true
         }
       },
       {
@@ -108,7 +111,8 @@
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
-          "title": "Clientes atualizados no dia de ontem"
+          "title": "Clientes atualizados no dia",
+          "current_date_on_title": true
         }
       }
     ]
