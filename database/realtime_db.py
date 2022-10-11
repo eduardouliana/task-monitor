@@ -4,7 +4,7 @@ from firebase_admin import db
 
 class RealTimeDB():
 
-    def __init__(self, realtime_db_name, account_key_path = ''):
+    def __init__(self, realtime_db_name):
         account_key_filepath = f'{realtime_db_name}.json'
         cred = credentials.Certificate(account_key_filepath)
         url = f'https://{realtime_db_name}.firebaseio.com/'
