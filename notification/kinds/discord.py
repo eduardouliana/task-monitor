@@ -12,6 +12,7 @@ class Notification:
         self.__webhook = DiscordWebhook(
             url=data.url, username=data.user_name, avatar_url=data.avatar_url
         )
+        self.__color = data.color
 
     def send(self, embed):
         self.__webhook.add_embed(embed)
@@ -24,7 +25,7 @@ class Notification:
             embed = DiscordEmbed(
                 title=self.__title,
                 description=msg,
-                color="FF0000",
+                color=self.__color,
             )
 
             embed.set_footer(
