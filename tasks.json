@@ -99,22 +99,7 @@
       {
         "kind": "discord",
         "data": {
-          "url": "BROADCAST_WEBHOOK_URL_ATUALIZACAO",
-          "user-name": "Broadcast",
-          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
-          "color": "FFD700",
-          "title": "Clientes atualizados no dia ",
-          "date-configuration": {
-            "date-on-title": true,
-            "days-offset": -1,
-            "date-format": "%d/%m/%Y"
-          }
-        }
-      },
-      {
-        "kind": "discord",
-        "data": {
-          "url": "BROADCAST_WEBHOOK_URL_SCRUM",
+          "url": "BROADCAST_WEBHOOK_URL",
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
@@ -151,7 +136,7 @@
       {
         "kind": "discord",
         "data": {
-          "url": "BROADCAST_WEBHOOK_URL_ATUALIZACAO",
+          "url": "BROADCAST_WEBHOOK_URL",
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
