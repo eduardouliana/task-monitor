@@ -127,5 +127,161 @@
         }
       }
     ]
+  },
+  {
+    "name": "Quantidade Total de PDVs Veraz",
+    "kind": "sql_report",
+    "schedule": [
+      {
+        "kind": "interval",
+        "time": 60,
+        "start": "08:00",
+        "end": "08:55"
+      }
+    ],
+    "configuration": {
+      "database": {
+        "username": "BROADCAST_DATABASE_USERNAME",
+        "password": "BROADCAST_DATABASE_PASSWORD",
+        "host": "BROADCAST_DATABASE_HOST",
+        "database": "BROADCAST_DATABASE_NAME"
+      },
+      "sql-command": "SELECT count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao = 100010 and tx_identificacao01 = 'PDVSysmo Veraz'",
+      "message-format": "_{1}_"
+    },
+    "notifications": [
+      {
+        "kind": "discord",
+        "data": {
+          "url": "BROADCAST_WEBHOOK_URL_VERAZ",
+          "user-name": "Versoes-Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+          "color": "FFD700",
+          "title": "Quantidade Total de PDVs Veraz",
+          "date-configuration": {
+            "date-on-title": true,
+            "days-offset": -1,
+            "date-format": "%d de %B de %Y"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Quantidade PDV por versão",
+    "kind": "sql_report",
+    "schedule": [
+      {
+        "kind": "interval",
+        "time": 60,
+        "start": "08:00",
+        "end": "08:55"
+      }
+    ],
+    "configuration": {
+      "database": {
+        "username": "BROADCAST_DATABASE_USERNAME",
+        "password": "BROADCAST_DATABASE_PASSWORD",
+        "host": "BROADCAST_DATABASE_HOST",
+        "database": "BROADCAST_DATABASE_NAME"
+      },
+      "sql-command": "SELECT tx_identificacao02, count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao = 100020 GROUP by tx_identificacao02 ORDER by quant DESC",
+      "message-format": "_{1}_ _{2}_"
+    },
+    "notifications": [
+      {
+        "kind": "discord",
+        "data": {
+          "url": "BROADCAST_WEBHOOK_URL_VERAZ",
+          "user-name": "Versoes-Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+          "color": "FFD700",
+          "title": "Quantidade PDV por versão",
+          "date-configuration": {
+            "date-on-title": true,
+            "days-offset": -1,
+            "date-format": "%d de %B de %Y"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Quantidade Total de Monitores Veraz",
+    "kind": "sql_report",
+    "schedule": [
+      {
+        "kind": "interval",
+        "time": 60,
+        "start": "08:00",
+        "end": "08:55"
+      }
+    ],
+    "configuration": {
+      "database": {
+        "username": "BROADCAST_DATABASE_USERNAME",
+        "password": "BROADCAST_DATABASE_PASSWORD",
+        "host": "BROADCAST_DATABASE_HOST",
+        "database": "BROADCAST_DATABASE_NAME"
+      },
+      "sql-command": "SELECT count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao in (100030,100031)",
+      "message-format": "_{1}_"
+    },
+    "notifications": [
+      {
+        "kind": "discord",
+        "data": {
+          "url": "BROADCAST_WEBHOOK_URL_VERAZ",
+          "user-name": "Versoes-Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+          "color": "FFD700",
+          "title": "Quantidade Total de Monitores Veraz",
+          "date-configuration": {
+            "date-on-title": true,
+            "days-offset": -1,
+            "date-format": "%d de %B de %Y"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Quantidade Monitor por versão",
+    "kind": "sql_report",
+    "schedule": [
+      {
+        "kind": "interval",
+        "time": 60,
+        "start": "08:00",
+        "end": "08:55"
+      }
+    ],
+    "configuration": {
+      "database": {
+        "username": "BROADCAST_DATABASE_USERNAME",
+        "password": "BROADCAST_DATABASE_PASSWORD",
+        "host": "BROADCAST_DATABASE_HOST",
+        "database": "BROADCAST_DATABASE_NAME"
+      },
+      "sql-command": "SELECT tx_identificacao02, count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao in (100030,100031) GROUP by tx_identificacao02 ORDER by tx_identificacao02 desc",
+      "message-format": "_{1}_ _{2}_"
+    },
+    "notifications": [
+      {
+        "kind": "discord",
+        "data": {
+          "url": "BROADCAST_WEBHOOK_URL_VERAZ",
+          "user-name": "Versoes-Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
+          "color": "FFD700",
+          "title": "Quantidade Monitor por versão",
+          "date-configuration": {
+            "date-on-title": true,
+            "days-offset": -1,
+            "date-format": "%d de %B de %Y"
+          }
+        }
+      }
+    ]
   }
 ]
