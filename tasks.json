@@ -67,7 +67,7 @@
           "title": "Top-10 Stacktrace do dia ",
           "date-configuration": {
             "date-on-title": true,
-            "days-offset": 0,
+            "days-offset": -1,
             "date-format": "%d/%m/%Y"
           }
         }
@@ -92,14 +92,14 @@
         "host": "BROADCAST_DATABASE_HOST",
         "database": "BROADCAST_DATABASE_NAME"
       },
-      "sql-command": "with hist_att as (\nselect ha.cd_cliente, string_agg(ha.tx_versao, ',') as versions, max(ha.dt_atualizacao) as date_att\n  from (select ROW_NUMBER() OVER (PARTITION BY cd_cliente ORDER BY dt_atualizacao desc) AS r, t.*\n          from tb_historicoatualizacao t) ha\n where ha.r <= 2\n group by cd_cliente\n) select c.nr_cnpj, c.tx_fantasia, c.tx_razaosocial, split_part(ha.versions, ',', 1) as new_version, \n        split_part(ha.versions, ',', 2) as old_version\n   from hist_att ha\n   left join tb_cliente c on c.cd_sistemasuporte = ha.cd_cliente\n  where ha.date_att::date = 'yesterday'\n  group by c.nr_cnpj, c.tx_fantasia, c.tx_razaosocial, ha.versions, ha.date_att",
-      "message-format": ":arrow_forward: **{1}**_\n({2})_\n**CNPJ:** {0}\nDa versão _{4}_:small_red_triangle_down: para _{3}_:small_red_triangle:"
+      "sql-command": "with hist_att as (\nselect ha.cd_cliente, string_agg(ha.tx_versao, ',') as versions, max(ha.dt_atualizacao) as date_att, ha.tx_nomebase\n  from (select ROW_NUMBER() OVER (PARTITION BY cd_cliente ORDER BY dt_atualizacao desc) AS r, t.*\n          from tb_historicoatualizacao t) ha\n where ha.r <= 2\n group by cd_cliente, ha.tx_nomebase\n) select c.nr_cnpj, c.tx_fantasia, c.tx_razaosocial, split_part(ha.versions, ',', 1) as new_version, \n        split_part(ha.versions, ',', 2) as old_version,\n        coalesce(ha.tx_nomebase, '_<não-coletado>_') as tx_nomebase\n   from hist_att ha\n   left join tb_cliente c on c.cd_sistemasuporte = ha.cd_cliente\n  where ha.date_att::date = 'yesterday'\n  group by c.nr_cnpj, c.tx_fantasia, c.tx_razaosocial, ha.versions, ha.date_att, ha.tx_nomebase",
+      "message-format": ":arrow_forward: **{1}**_\n({2})_\n**CNPJ:** {0}\t**Base:** {5}\nDa versão _{4}_:small_red_triangle_down: para _{3}_:small_red_triangle:"
     },
     "notifications": [
       {
         "kind": "discord",
         "data": {
-          "url": "BROADCAST_WEBHOOK_URL_ATUALIZACAO",
+          "url": "BROADCAST_WEBHOOK_URL",
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
@@ -107,23 +107,40 @@
           "date-configuration": {
             "date-on-title": true,
             "days-offset": -1,
-            "date-format": "%d de %B de %Y"
+            "date-format": "%d/%m/%Y"
           }
         }
+      }
+    ]
+  },
+  {
+    "name": "Resumo clientes atualizados na semana",
+    "kind": "sql_report",
+    "schedule": [
+      {
+        "kind": "cron",
+        "cron": "55 23 * * 0"
+      }
+    ],
+    "configuration": {
+      "database": {
+        "username": "BROADCAST_DATABASE_USERNAME",
+        "password": "BROADCAST_DATABASE_PASSWORD",
+        "host": "BROADCAST_DATABASE_HOST",
+        "database": "BROADCAST_DATABASE_NAME"
       },
+      "sql-command": "with hist_att as (\nselect ha.cd_cliente, string_agg(ha.tx_versao, ',') as versions, max(ha.dt_atualizacao) as date_att, ha.tx_nomebase\n  from (select ROW_NUMBER() OVER (PARTITION BY cd_cliente ORDER BY dt_atualizacao desc) AS r, t.*\n          from tb_historicoatualizacao t) ha\n where ha.r <= 2\n group by cd_cliente, ha.tx_nomebase\n) select c.nr_cnpj, c.tx_fantasia, coalesce(nullif(split_part(ha.versions, ',', 1), ''), '<não-coletado>') as new_version, \n        coalesce(nullif(split_part(ha.versions, ',', 2), ''), '<não-coletado>') as old_version, to_char(ha.date_att::date, 'dd/mm/YYYY'),\n        coalesce(ha.tx_nomebase, '_<não-coletado>_') as tx_nomebase\n   from hist_att ha\n   left join tb_cliente c on c.cd_sistemasuporte = ha.cd_cliente\n  where ha.date_att::date between now()::date -7 and now()::date\n  group by c.nr_cnpj, c.tx_fantasia, c.tx_razaosocial, ha.versions, ha.date_att, ha.tx_nomebase\n  order by ha.date_att, ha.versions",
+      "message-format": ":arrow_forward: **{1}** ({0}): No dia _{4}_ atualizou a base **{5}** da versão _{3}_ para _{2}_"
+    },
+    "notifications": [
       {
         "kind": "discord",
         "data": {
-          "url": "BROADCAST_WEBHOOK_URL_SCRUM",
+          "url": "BROADCAST_WEBHOOK_URL",
           "user-name": "Broadcast",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
           "color": "FFD700",
-          "title": "Clientes atualizados no dia ",
-          "date-configuration": {
-            "date-on-title": true,
-            "days-offset": -1,
-            "date-format": "%d de %B de %Y"
-          }
+          "title": "Resumo clientes atualizados na semana"
         }
       }
     ]
