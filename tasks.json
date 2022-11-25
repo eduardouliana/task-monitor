@@ -154,7 +154,7 @@
         "kind": "discord",
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
-          "user-name": "Versoes-Veraz",
+          "user-name": "PDV-Veraz",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-pdv-veraz.png",
           "color": "0902c7",
           "title": "Quantidade Total de PDVs Veraz - ",
@@ -193,7 +193,7 @@
         "kind": "discord",
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
-          "user-name": "Versoes-Veraz",
+          "user-name": "PDV-Veraz",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-pdv-veraz.png",
           "color": "0902c7",
           "title": "Quantidade PDV por versão - ",
@@ -232,7 +232,7 @@
         "kind": "discord",
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
-          "user-name": "Versoes-Veraz",
+          "user-name": "Monitor-Veraz",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-monitor.png",
           "color": "02c7c0",
           "title": "Quantidade Total de Monitores Veraz - ",
@@ -271,7 +271,7 @@
         "kind": "discord",
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
-          "user-name": "Versoes-Veraz",
+          "user-name": "Monitor-Veraz",
           "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-monitor.png",
           "color": "02c7c0",
           "title": "Quantidade Monitor por versão - ",
