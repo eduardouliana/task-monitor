@@ -146,8 +146,8 @@
         "host": "BROADCAST_DATABASE_HOST",
         "database": "BROADCAST_DATABASE_NAME"
       },
-      "sql-command": "SELECT count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao = 100010 and tx_identificacao01 = 'PDVSysmo Veraz'",
-      "message-format": "_{1}_"
+      "sql-command": "SELECT count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao = 100020",
+      "message-format": "_{0}_ PDVs Veraz"
     },
     "notifications": [
       {
@@ -155,9 +155,9 @@
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
           "user-name": "Versoes-Veraz",
-          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
-          "color": "FFD700",
-          "title": "Quantidade Total de PDVs Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-pdv-veraz.png",
+          "color": "0902c7",
+          "title": "Quantidade Total de PDVs Veraz - ",
           "date-configuration": {
             "date-on-title": true,
             "days-offset": -1,
@@ -186,7 +186,7 @@
         "database": "BROADCAST_DATABASE_NAME"
       },
       "sql-command": "SELECT tx_identificacao02, count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao = 100020 GROUP by tx_identificacao02 ORDER by quant DESC",
-      "message-format": "_{1}_ _{2}_"
+      "message-format": "Versão = _{0}_   | _{1}_ PDVs"
     },
     "notifications": [
       {
@@ -194,9 +194,9 @@
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
           "user-name": "Versoes-Veraz",
-          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
-          "color": "FFD700",
-          "title": "Quantidade PDV por versão",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-pdv-veraz.png",
+          "color": "0902c7",
+          "title": "Quantidade PDV por versão - ",
           "date-configuration": {
             "date-on-title": true,
             "days-offset": -1,
@@ -207,7 +207,7 @@
     ]
   },
   {
-    "name": "Quantidade Total de Monitores Veraz",
+    "name": "Quantidade Total de Monitores Veraz - ",
     "kind": "sql_report",
     "schedule": [
       {
@@ -225,7 +225,7 @@
         "database": "BROADCAST_DATABASE_NAME"
       },
       "sql-command": "SELECT count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao in (100030,100031)",
-      "message-format": "_{1}_"
+      "message-format": "_{0}_ Monitores Veraz"
     },
     "notifications": [
       {
@@ -233,9 +233,9 @@
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
           "user-name": "Versoes-Veraz",
-          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
-          "color": "FFD700",
-          "title": "Quantidade Total de Monitores Veraz",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-monitor.png",
+          "color": "02c7c0",
+          "title": "Quantidade Total de Monitores Veraz - ",
           "date-configuration": {
             "date-on-title": true,
             "days-offset": -1,
@@ -264,7 +264,7 @@
         "database": "BROADCAST_DATABASE_NAME"
       },
       "sql-command": "SELECT tx_identificacao02, count(*) as quant FROM tb_pdv_dados WHERE cd_tipoinformacao in (100030,100031) GROUP by tx_identificacao02 ORDER by tx_identificacao02 desc",
-      "message-format": "_{1}_ _{2}_"
+      "message-format": "Versão = _{0}_   | _{1}_ Monitores"
     },
     "notifications": [
       {
@@ -272,9 +272,9 @@
         "data": {
           "url": "BROADCAST_WEBHOOK_URL_VERAZ",
           "user-name": "Versoes-Veraz",
-          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/ss_sysmo01.png",
-          "color": "FFD700",
-          "title": "Quantidade Monitor por versão",
+          "avatar-url": "https://www.sysmo.com.br/sysmo/imagens/produtos/icon-monitor.png",
+          "color": "02c7c0",
+          "title": "Quantidade Monitor por versão - ",
           "date-configuration": {
             "date-on-title": true,
             "days-offset": -1,
